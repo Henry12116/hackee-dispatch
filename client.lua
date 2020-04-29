@@ -28,8 +28,6 @@ AddEventHandler('dispatch:createAOEListener', function(config)
       table.insert(ThreadIds, {squad.Name, GetIdOfThisThread()})
       Lock = false
 
-      print(ThreadIds)
-
       while true do
         local plyPed = GetPlayerPed(-1)
         local plyPos = GetEntityCoords(plyPed)
