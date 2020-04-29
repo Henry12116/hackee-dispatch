@@ -43,7 +43,7 @@ This event takes a table of `Names`. These names should correspond with the name
 
 `EnemiesWith` - player job (ESX) they will be enemies with
 
-`Event` - What event will trigger the squad to spawn. [See full list here](https://runtime.fivem.net/doc/natives/?_0x1374ABB7C15BAB92).
+`Event` - What event will trigger the squad to spawn. Examples include gun shots, has weapon out, honks horn, etc. [See full list here](https://runtime.fivem.net/doc/natives/?_0x1374ABB7C15BAB92).
 
 `NumberOfWaves` - # waves of npcs
 
