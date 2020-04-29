@@ -4,9 +4,9 @@ Citizen.CreateThread(function()
 	TriggerServerEvent('dispatch:createDispatch', Config)
 end)
 
--- example of how to turn off a dispatch area
-Citizen.CreateThread(function()
-	-- waits 10s then turns off ballas disptach
-	Citizen.Wait(10000)
-	TriggerServerEvent('dispatch:stopDispatch', {'Ballas'})
-end)
+-- Example of turning off a dispatch
+-- Citizen.CreateThread(function()
+-- 	-- waits 10s then turns off ballas disptach
+-- 	Citizen.Wait(10000)
+-- 	TriggerServerEvent('dispatch:stopDispatch', {'Ballas'})
+-- end)
