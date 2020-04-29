@@ -1,4 +1,7 @@
-# hackee-dispatch
+# hackee-dispatch ([original forum post](https://forum.cfx.re/t/release-esx-hackee-dispatch-configure-custom-npc-dispatches/1176475))
+
+
+
 ## What is it?
 This is a utility that makes creating custom "dispatches" of NPCs a little easier. What is a dispatch you might ask? An example would be the random NPCs that start spawning if you shoot in a gang area (like near grove street): ![example](https://i.imgur.com/mLj9K4d.png)
 
