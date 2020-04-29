@@ -21,7 +21,7 @@ Citizen.CreateThread(function()
 	TriggerServerEvent('dispatch:createDispatch', Config)
 end)
 ```
-This event takes a `Config`, which you would have to define for your resource. See the example resource for more info.
+This event takes a `Config`, which you would have to define for your resource. The `Config` can consist of a singular dispatch squad or multiple dispatch squads, the choice is yours! See the [example resource config](https://github.com/Henry12116/hackee-dispatch/blob/master/example/config.lua) for more info.
 
 ### dispatch:stopDispatch
 ```lua
@@ -29,7 +29,7 @@ Citizen.CreateThread(function()
 	TriggerServerEvent('dispatch:stopDispatch', {'Ballas'})
 end)
 ```
-This event takes a table of `Names`. These names should correspond with the names inside your `Config`. This will stop a particular dispatch from spawning any NPCs.
+This event takes a table of `Names`. These names should correspond with the names inside your `Config`. What this does is essentially stop an area from listeining for triggering events, so NPCs won't spawn.
 
 ## Configuration
 `Config.DebugMode` - Show aoe markers or not.
