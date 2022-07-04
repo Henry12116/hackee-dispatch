@@ -1,6 +1,9 @@
+
 RegisterServerEvent('dispatch:createDispatch')
 AddEventHandler('dispatch:createDispatch', function(config)
-    TriggerClientEvent("dispatch:createAOEListener", -1, config)
+            if not NPCSHaveSpawned then
+                NPCSHaveSpawned = true
+                TriggerClientEvent("dispatch:createAOEListener", -1, config)
 end)
 
 RegisterServerEvent('dispatch:stopDispatch')
