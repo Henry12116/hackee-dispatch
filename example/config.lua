@@ -14,7 +14,8 @@ Config.DispatchSquads = {
             'mechanic',
             'taxi'
         },
-        Event = 89, -- number cooresponts to https://runtime.fivem.net/doc/natives/?_0x1374ABB7C15BAB92
+        Event = 91, -- number corresponds to https://runtime.fivem.net/doc/natives/?_0x1374ABB7C15BAB92 |Change it to 91 for Gamebuild 2372 | Trigger when shooting
+      --Event = 89, -- Use this if you are on a Gamebuild earlier than 2372
         NumberOfWaves = 3,
         NumberPerWave = 2,
         TimeBetweenWaves = math.random(5000, 8000), -- in ms
@@ -63,7 +64,8 @@ Config.DispatchSquads = {
             'mechanic',
             'taxi'
         },
-        Event = 89,
+        Event = 91, -- number corresponds to https://runtime.fivem.net/doc/natives/?_0x1374ABB7C15BAB92 |Change it to 91 for Gamebuild 2372 | Trigger when shooting
+      --Event = 89, -- Use this if you are on a Gamebuild earlier than 2372
         NumberOfWaves = 3,
         NumberPerWave = 2,
         TimeBetweenWaves = math.random(5000, 8000), -- in ms
