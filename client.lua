@@ -108,6 +108,7 @@ function CreateNPCThread(squad, plyPed)
       SetPedAccuracy(createdNPC, 60)
       SetPedRelationshipGroupHash(createdNPC, GetHashKey("AMBIENT_GANG_WEICHENG"))
       SetPedRelationshipGroupDefaultHash(createdNPC, GetHashKey("AMBIENT_GANG_WEICHENG"))
+      SetPedHasAiBlip(createdNPC, true)
 
       -- set npc relationship with local gang npcs
       for i, ally in pairs(squad.AlliesWith) do
