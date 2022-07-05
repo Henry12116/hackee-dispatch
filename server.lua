@@ -1,3 +1,4 @@
+local NPCSHaveSpawned = false
 
 RegisterServerEvent('dispatch:createDispatch')
 AddEventHandler('dispatch:createDispatch', function(config)
