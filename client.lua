@@ -2,6 +2,14 @@ ESX = nil
 IsLocked = false
 ThreadIds = {}
 
+RegisterNetEvent('npcCheckFromServer')
+AddEventHandler('npcCheckFromServer', function(NPCSpawned)
+	print ("This is spawned from the server")
+	print(NPCSpawned)
+	spawned = NPCSpawned
+end)
+
+
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
