@@ -1,6 +1,16 @@
+RegisterServerEvent('spawnCheckHomie')
+	AddEventHandler('spawnCheckHomie', function(spawned)
+		NPCSpawned = spawned
+		print ("This is spawned coming from the client")
+		print(spawned)
+		--TriggerEvent('PassBackToClient', isSpawned)
+		TriggerClientEvent('npcCheckFromServer', NPCSpawned)
+	
+end)
+
 RegisterServerEvent('dispatch:createDispatch')
 AddEventHandler('dispatch:createDispatch', function(config)
-    TriggerClientEvent("dispatch:createAOEListener", -1, config)
+                TriggerClientEvent("dispatch:createAOEListener", -1, config)
 end)
 
 RegisterServerEvent('dispatch:stopDispatch')

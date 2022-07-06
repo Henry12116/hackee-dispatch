@@ -2,6 +2,14 @@ ESX = nil
 IsLocked = false
 ThreadIds = {}
 
+RegisterNetEvent('npcCheckFromServer')
+AddEventHandler('npcCheckFromServer', function(NPCSpawned)
+	print ("This is spawned from the server")
+	print(NPCSpawned)
+	spawned = NPCSpawned
+end)
+
+
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -17,6 +25,9 @@ end)
 
 RegisterNetEvent('dispatch:createAOEListener')
 AddEventHandler('dispatch:createAOEListener', function(config)
+if spawned == true then
+print ("NPCs have been spawned")
+else
   for i, squad in pairs(config.DispatchSquads) do
     if config.DebugMode then
       CreateDebugMarker(squad)
@@ -27,18 +38,32 @@ AddEventHandler('dispatch:createAOEListener', function(config)
       Lock = true
       table.insert(ThreadIds, {squad.Name, GetIdOfThisThread()})
       Lock = false
-
+	  TriggerEvent('npcCheckFromServer')
       while true do
         local plyPed = GetPlayerPed(-1)
         local plyPos = GetEntityCoords(plyPed)
         Citizen.Wait(1)
         if ESX.PlayerData.job ~= nil and table.contains( squad.EnemiesWith, ESX.PlayerData.job.name) and (GetVecDist(plyPos, squad.CentralPos) < squad.TriggerDistance) and IsShockingEventInSphere(squad.Event, squad.CentralPos.x, squad.CentralPos.y, squad.CentralPos.z, squad.TriggerDistance) then
-          SpawnEnemyDispatch(squad)
-          Citizen.Wait(squad.TimeBeforeUpAgain)
+		  if spawned == nil then 
+			--print ("BRUH ITS NIL")
+			spawned = false 
+			TriggerServerEvent('spawnCheckHomie', spawned)
+		  elseif spawned == true then
+		  elseif spawned == false then
+			--print ("BRUH ITS FALSE")
+			SpawnEnemyDispatch(squad)
+			spawned = true
+			print(spawned)
+			TriggerServerEvent('spawnCheckHomie', spawned)
+			Citizen.Wait(squad.TimeBeforeUpAgain)
+			spawned = false 
+			TriggerServerEvent('spawnCheckHomie', spawned)
+		   end
         end
       end
     end)
   end
+end
 end)
 
 RegisterNetEvent('dispatch:stopAOEListener')
@@ -85,9 +110,12 @@ function SpawnEnemyDispatch(squad)
     end
     Citizen.Wait(squad.TimeBetweenWaves)
   end
+	spawned = true
+	TriggerServerEvent('spawnCheckHomie', spawned)
 end
 
 function CreateNPCThread(squad, plyPed)
+	TriggerEvent('npcCheckFromServer')
   if table.contains( squad.EnemiesWith, ESX.PlayerData.job.name) then
     Citizen.CreateThread(function()
       Citizen.Wait(0)
@@ -102,12 +130,13 @@ function CreateNPCThread(squad, plyPed)
 
       -- Randomly spawn in npc
       Citizen.Wait(math.random(1000, 2000))
-      local createdNPC = CreatePed(4, npc, spawnPoint.x, spawnPoint.y, spawnPoint.z, spawnPoint.h, true, false)
+      local createdNPC = CreatePed(4, npc, spawnPoint.x, spawnPoint.y, spawnPoint.z, spawnPoint.h, true, true)
       SetNetworkIdExistsOnAllMachines(NetworkGetNetworkIdFromEntity(createdNPC), true)
 
       SetPedAccuracy(createdNPC, 60)
       SetPedRelationshipGroupHash(createdNPC, GetHashKey("AMBIENT_GANG_WEICHENG"))
       SetPedRelationshipGroupDefaultHash(createdNPC, GetHashKey("AMBIENT_GANG_WEICHENG"))
+      SetPedHasAiBlip(createdNPC, true)
 
       -- set npc relationship with local gang npcs
       for i, ally in pairs(squad.AlliesWith) do
@@ -177,6 +206,8 @@ function CreateNPCThread(squad, plyPed)
       DeleteNPC(createdNPC)
     end)
   end
+	spawned = true
+	TriggerServerEvent('spawnCheckHomie', spawned)
 end
 
 function DeleteNPC(entity)
