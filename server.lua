@@ -1,11 +1,16 @@
-local NPCSHaveSpawned = false
+RegisterServerEvent('spawnCheckHomie')
+	AddEventHandler('spawnCheckHomie', function(spawned)
+		NPCSpawned = spawned
+		print ("This is spawned coming from the client")
+		print(spawned)
+		--TriggerEvent('PassBackToClient', isSpawned)
+		TriggerClientEvent('npcCheckFromServer', NPCSpawned)
+	
+end)
 
 RegisterServerEvent('dispatch:createDispatch')
 AddEventHandler('dispatch:createDispatch', function(config)
-            if not NPCSHaveSpawned then
-                NPCSHaveSpawned = true
                 TriggerClientEvent("dispatch:createAOEListener", -1, config)
-            end
 end)
 
 RegisterServerEvent('dispatch:stopDispatch')
